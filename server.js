@@ -18,3 +18,13 @@ app.get('/api/notes', (req, res) => {
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, 'Develop/public/notes.html'));
 });
+
+app.post('/api/notes', (req, res) => {
+    req.body.id = noteData.length.toString();
+    noteData.push(req.body);
+    fs.writeFileSync(
+        path.join(__dirname, './Develop/db/db.json'),
+        JSON.stringify(noteData, null, 2)
+    );
+    res.send(noteData);
+});
