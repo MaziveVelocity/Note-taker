@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const fs = require('fs');
+const path = require('path');
 const noteData = require('../../../../db/db.json');
 
 // ---------------GET---------------//
@@ -14,7 +15,7 @@ router.post('/notes', (req, res) => {
     req.body.id = noteData.length.toString();
     noteData.push(req.body);
     fs.writeFileSync(
-        path.join(__dirname, './Develop/db/db.json'),
+        path.join(__dirname, '../../../../db/db.json'),
         JSON.stringify(noteData, null, 2)
     );
     res.send(noteData);
@@ -27,7 +28,7 @@ router.delete('/notes/:id', (req, res) => {
         if (noteData[i].id === req.params.id) {
             noteData.splice(i, 1);
             fs.writeFileSync(
-                path.join(__dirname, './Develop/db/db.json'),
+                path.join(__dirname, '../../../../db/db.json'),
                 JSON.stringify(noteData, null, 2)
             );
             res.status(200).json('Item successfully deleted');

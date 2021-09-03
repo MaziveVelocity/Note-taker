@@ -75,6 +75,7 @@ const handleNoteSave = () => {
   saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();
+    hide(noteContainerEl);
   });
 };
 
@@ -101,11 +102,12 @@ const handleNoteView = (e) => {
   e.preventDefault();
   activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
   renderActiveNote();
+  show(noteContainerEl);
 };
 
 // Sets the activeNote to and empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
-  noteContainerEl.setAttribute('style', 'display: block');
+  show(noteContainerEl);
   activeNote = {};
   renderActiveNote();
 };
