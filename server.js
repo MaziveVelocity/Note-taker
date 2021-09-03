@@ -12,7 +12,6 @@ app.use(express.static('develop/public'));
 
 app.get('/api/notes', (req, res) => {
     res.json(noteData);
-    console.log(noteData);
 });
 
 app.get('/notes', (req, res) => {
@@ -29,6 +28,20 @@ app.post('/api/notes', (req, res) => {
     res.send(noteData);
 });
 
+app.delete('/api/notes/:id', (req, res) => {
+    for (var i = 0; i < noteData.length; i++) {
+        if (noteData[i].id === req.params.id) {
+            noteData.splice(i, 1);
+            fs.writeFileSync(
+                path.join(__dirname, './Develop/db/db.json'),
+                JSON.stringify(noteData, null, 2)
+            );
+            res.status(200).json('Item successfully deleted');
+        }else{
+
+        }
+    };
+});
 
 app.listen(PORT, () => {
     console.log('Server Started');
