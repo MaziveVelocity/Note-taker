@@ -28,3 +28,8 @@ app.post('/api/notes', (req, res) => {
     );
     res.send(noteData);
 });
+
+
+app.listen(PORT, () => {
+    console.log('Server Started');
+});
