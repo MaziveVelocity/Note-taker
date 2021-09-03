@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const path = require('path');
 
+// ---------------GET---------------//
+//     gets pages for the webpage   //
 router.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '../../../notes.html'));
 });

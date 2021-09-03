@@ -2,10 +2,14 @@ const router = require('express').Router();
 const fs = require('fs');
 const noteData = require('../../../../db/db.json');
 
+// ---------------GET---------------//
+//  gets note data for the webpage  //
 router.get('/notes', (req, res) => {
     res.json(noteData);
 });
 
+// ---------------POST---------------//
+// updates note data for the webpage //
 router.post('/notes', (req, res) => {
     req.body.id = noteData.length.toString();
     noteData.push(req.body);
@@ -16,6 +20,8 @@ router.post('/notes', (req, res) => {
     res.send(noteData);
 });
 
+// ---------------DELETE---------------//
+//  deletes note data for the webpage  //
 router.delete('/notes/:id', (req, res) => {
     for (var i = 0; i < noteData.length; i++) {
         if (noteData[i].id === req.params.id) {
